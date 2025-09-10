@@ -8,9 +8,11 @@ availability_zone = "ap-southeast-1a"
 
 # Instance Configuration
 instance_name = "seedance-v2-server"
-instance_type = "ecs.g3i.large"  # GPU instance for AI workload
+instance_type = "ecs.t2-c1m1.large"
 key_pair_name = "seedance-keypair"
 
 # Seedance Application Configuration
 byteplus_api_key  = "your_byteplus_api_key_here"
 byteplus_base_url = "https://ark.ap-southeast.bytepluses.com/api/v3"
+
+

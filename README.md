@@ -94,18 +94,22 @@ BP-Training-GenVideoWeb/
 Create `terraform.tfvars` file with your credentials:
 
 ```hcl
-# BytePlus Cloud Credentials
-access_key = "your_byteplus_access_key"
-secret_key = "your_byteplus_secret_key"
+# BytePlus Access Credentials
+access_key = "your_access_key_here"
+secret_key = "your_secret_key_here"
 
-# BytePlus Seedance API
-byteplus_api_key = "your_seedance_api_key"
-byteplus_base_url = "https://open.byteplusapi.com"
+# Region Configuration
+region            = "ap-southeast-1"
+availability_zone = "ap-southeast-1a"
 
-# Optional: Customize deployment
-region = "ap-southeast-1"
-instance_type = "ecs.g3i.large"
-instance_name = "my-seedance-server"
+# Instance Configuration
+instance_name = "seedance-v2-server"
+instance_type = "ecs.t2-c1m1.large"
+key_pair_name = "seedance-keypair"
+
+# Seedance Application Configuration
+byteplus_api_key  = "your_byteplus_api_key_here"
+byteplus_base_url = "https://ark.ap-southeast.bytepluses.com/api/v3"
 ```
 
 ### Option 2: Manual Deployment
