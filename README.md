@@ -392,8 +392,6 @@ curl -I http://PUBLIC_IP
 
 
 
-
-
 ## 🌐 Access Application
 
 After deployment is complete, you can access the application via:
@@ -405,11 +403,28 @@ After deployment is complete, you can access the application via:
 
 
 
+![web](./web.png)
 
 
 
 
 
+
+
+
+
+
+
+### Cleanup
+
+```bash
+# Destroy infrastructure
+terraform destroy
+```
+
+---
+
+## 
 
 
 
@@ -498,22 +513,6 @@ tail -f /var/log/nginx/error.log
 ```
 
 ---
-
-## 🌐 Access Application
-
-After deployment is complete, you can access the application via:
-
-### Web Interface Access
-- **Main access URL**: `http://PUBLIC_IP` (via Nginx proxy)
-- **Direct access URL**: `http://PUBLIC_IP:7860` (direct Gradio access)
-
-
-
-![web](./web.png)
-
-
-
-![image-20250911053411565](/Users/jason/BytePlus/CodeBase/HF-Local/Training-Apps/BP-Training-GenVideoWeb/web.png)
 
 
 
@@ -779,17 +778,6 @@ netstat -tuln
 
 
 
-
-
-
-### Cleanup
-
-```bash
-# Destroy infrastructure
-terraform destroy
-```
-
----
 
 ## 🤝 Contributing
 
