@@ -507,7 +507,18 @@ After deployment is complete, you can access the application via:
 - **Main access URL**: `http://PUBLIC_IP` (via Nginx proxy)
 - **Direct access URL**: `http://PUBLIC_IP:7860` (direct Gradio access)
 
+
+
+![web](./web.png)
+
+
+
+![image-20250911053411565](/Users/jason/BytePlus/CodeBase/HF-Local/Training-Apps/BP-Training-GenVideoWeb/web.png)
+
+
+
 ### SSH Management Access
+
 ```bash
 ssh -i seedance-keypair.pem root@PUBLIC_IP
 ```
