@@ -64,7 +64,7 @@ pwd
 
 ```bash
 # Set GitHub raw file URL
-GITHUB_BASE="https://raw.githubusercontent.com/kookliu/BP-Training-GenVideoWeb/main/terraform-seedance-v2"
+GITHUB_BASE="https://raw.githubusercontent.com/kookliu/BP-Training-GenVideoWeb/refs/heads/main/terraform-seedance-v2/seedance-v2/"
 
 # Download main application file
 curl -L -o app.py "$GITHUB_BASE/app.py"
