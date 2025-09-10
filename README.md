@@ -43,7 +43,7 @@ BP-Training-GenVideoWeb/
 
 ## 🛠️ Deployment Options
 
-### Option 1: Automated Terraform Deployment (Recommended)
+### Stage 1: Automated Terraform Deployment Infrastructure
 
 #### Prerequisites
 - [Terraform](https://www.terraform.io/downloads.html) >= 1.0
@@ -66,27 +66,6 @@ BP-Training-GenVideoWeb/
    
    # Edit configuration with your credentials
    vi terraform.tfvars
-   ```
-
-3. **Initialize and deploy**
-   ```bash
-   # Initialize Terraform
-   terraform init
-   
-   # Plan deployment
-   terraform plan
-   
-   # Deploy infrastructure
-   terraform apply
-   ```
-
-4. **Access your application**
-   ```bash
-   # Get public IP from outputs
-   terraform output public_ip
-   
-   # Access web interface
-   # http://YOUR_PUBLIC_IP
    ```
 
 #### Configuration Variables
@@ -112,7 +91,45 @@ byteplus_api_key  = "your_byteplus_api_key_here"
 byteplus_base_url = "https://ark.ap-southeast.bytepluses.com/api/v3"
 ```
 
-### Option 2: Manual Deployment
+
+3. **Initialize and deploy**
+   ```bash
+   # Initialize Terraform
+   terraform init
+   
+   # Plan deployment
+   terraform plan
+   
+   # Deploy infrastructure
+   terraform apply
+   ```
+
+
+
+#### Configuration Variables
+
+Create `terraform.tfvars` file with your credentials:
+
+```hcl
+# BytePlus Access Credentials
+access_key = "your_access_key_here"
+secret_key = "your_secret_key_here"
+
+# Region Configuration
+region            = "ap-southeast-1"
+availability_zone = "ap-southeast-1a"
+
+# Instance Configuration
+instance_name = "seedance-v2-server"
+instance_type = "ecs.t2-c1m1.large"
+key_pair_name = "seedance-keypair"
+
+# Seedance Application Configuration
+byteplus_api_key  = "your_byteplus_api_key_here"
+byteplus_base_url = "https://ark.ap-southeast.bytepluses.com/api/v3"
+```
+
+### Stage 2: Manual Deployment Application
 
 If you prefer manual deployment or need custom configuration, follow the detailed manual deployment guide below:
 
@@ -221,7 +238,7 @@ Create environment variables file:
 ```bash
 # Create environment variables file
 cat > .env << 'EOF'
-ARK_API_KEY=your_byteplus_api_key_here
+ARK_API_KEY=your_modelArk_api_key_here
 ARK_BASE_URL=https://ark.ap-southeast.bytepluses.com/api/v3
 EOF
 
@@ -332,8 +349,8 @@ WantedBy=multi-user.target
 EOF
 
 # ⚠️ Important: Edit service file, replace with real API key
-nano /etc/systemd/system/seedance.service
-# Replace "your_byteplus_api_key_here" with actual API key
+vim /etc/systemd/system/seedance.service
+# Replace "your_modelArk_api_key_here" with actual API key
 
 # Reload systemd configuration
 systemctl daemon-reload
@@ -367,11 +384,64 @@ curl -I http://localhost:7860
 curl -s ifconfig.me
 
 # 6. Test external access (from local machine)
-# curl -I http://PUBLIC_IP
-# curl -I http://PUBLIC_IP:7860
+curl -I http://PUBLIC_IP
+
 ```
 
 ---
+
+
+
+
+
+## 🌐 Access Application
+
+After deployment is complete, you can access the application via:
+
+### Web Interface Access
+
+- **Main access URL**: `http://PUBLIC_IP` (via Nginx proxy)
+- **Direct access URL**: `http://PUBLIC_IP:7860` (direct Gradio access)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 🔧 Common Management Commands
 
@@ -508,23 +578,7 @@ systemctl restart seedance
 
 ---
 
-## ✅ Deployment Checklist
 
-After deployment is complete, confirm all the following items are working:
-
-- [ ] SSH can connect to server normally
-- [ ] Python 3.12 environment works properly
-- [ ] Application files downloaded successfully from GitHub
-- [ ] Python virtual environment created successfully
-- [ ] Dependencies installed successfully
-- [ ] Environment variables configured correctly
-- [ ] Nginx configured correctly and running
-- [ ] Systemd service created and running
-- [ ] Ports 80 and 7860 listening normally
-- [ ] Application accessible via public IP
-- [ ] Application functions normally (can generate videos)
-
-Congratulations! You have successfully manually deployed the Seedance V2 application! 🎉
 
 ---
 
@@ -711,34 +765,14 @@ netstat -tuln
 
 ---
 
-## 🏃‍♂️ Quick Commands Reference
 
-### Deployment
-```bash
-# Quick deploy
-git clone https://github.com/kookliu/BP-Training-GenVideoWeb.git
-cd BP-Training-GenVideoWeb/terraform-seedance-v2
-cp terraform.tfvars.example terraform.tfvars
-# Edit terraform.tfvars with your credentials
-terraform init && terraform apply
-```
 
-### Management
-```bash
-# SSH connect
-ssh -i seedance-keypair.pem root@$(terraform output -raw public_ip)
 
-# Service control
-systemctl {start|stop|restart|status} seedance
 
-# View logs
-journalctl -u seedance -f
 
-# Update app
-cd /opt/seedance-v2 && curl -L -o app.py "https://raw.githubusercontent.com/kookliu/BP-Training-GenVideoWeb/main/terraform-seedance-v2/seedance-v2/app.py" && systemctl restart seedance
-```
 
 ### Cleanup
+
 ```bash
 # Destroy infrastructure
 terraform destroy
