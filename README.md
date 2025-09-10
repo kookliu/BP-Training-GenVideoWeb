@@ -65,7 +65,7 @@ BP-Training-GenVideoWeb/
    cp terraform.tfvars.example terraform.tfvars
    
    # Edit configuration with your credentials
-   nano terraform.tfvars
+   vi terraform.tfvars
    ```
 
 3. **Initialize and deploy**
